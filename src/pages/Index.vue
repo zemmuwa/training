@@ -6,6 +6,7 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
+    <q-btn color="primary" icon="check" label="Login" @click="login()" />
   </q-page>
 </template>
 
@@ -14,6 +15,7 @@ import Vue from 'vue'
 
 import ExampleComponent from 'components/CompositionComponent.vue'
 import { Todo, Meta } from 'components/models'
+import { auth } from 'boot/firestore'
 
 export default Vue.extend({
   name: 'PageIndex',
@@ -45,6 +47,18 @@ export default Vue.extend({
       totalCount: 1200
     }
     return { todos, meta }
+  },
+  methods: {
+    async login () {
+      await auth.signInWithEmailAndPassword(
+        'neo.spacians@gmail.com',
+        '12345678'
+      )
+      this.$router.replace({ path: '/training' })
+    }
+  },
+  mounted () {
+    // auth.createUserWithEmailAndPassword('neo.spacians@gmail.com', '12345678')
   }
 })
 </script>

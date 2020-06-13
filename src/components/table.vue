@@ -11,10 +11,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(d,index) in data" :key="index">
+      <tr class="cursor-pointer" @click="clickData(index)" v-for="(d,index) in data" :key="index">
         <td v-for="(e,index2) in d" :key="index2">
           {{e}}
-        </td>git remote add origin https://github.com/zemmuwa/training.git
+        </td>
         <td>
           <button @click="hapusData(index)">Hapus</button>
         </td>
@@ -59,8 +59,12 @@ export default {
   },
   methods: {
     hapusData (index) {
-      this.data.splice(index, 1)
-      this.$emit('onHapus', index)
+      // this.data.splice(index, 1)
+      this.$emit('onHapus', this.data[index]._id)
+    },
+    clickData (index) {
+      // this.data.splice(index, 1)
+      this.$emit('onClick', this.data[index]._id)
     },
     changeColor () {
       if (!this.warna || this.warna === 'bg-biru') {
